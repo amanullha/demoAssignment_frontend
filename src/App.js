@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Login from "./Components/Authentication/Login";
+import RequireAuth from "./Components/Authentication/RequireAuth";
+import Navbar from "./Layouts/Navbar";
+import Dashboard from "./Pages/Dashboard";
+import Home from "./Pages/Home";
+import { privateRoutes } from "./Routes/privateRoutes";
+import { publicRoute } from "./Routes/publicRoutes";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className=" relative" style={{position:'relative'}}>
+
+      <Navbar className="z-50 fixed top-0" />
+
+      <div className="z-0 ">
+        <Routes>
+
+
+          {
+            publicRoute.map(({ Name, Path, Component }, i) =>
+              <Route path={Path} element={<Component />} />
+            )
+          }
+
+          <Route element={<Dashboard />} >
+
+            {
+              privateRoutes.map(({ Path, Name, Component }, i) => {
+
+                return (
+                  <Route path={Path} element={<Component />} />
+                )
+
+              })
+
+            }
+
+          </Route>
+
+
+        </Routes>
+      </div>
+
     </div>
   );
 }
