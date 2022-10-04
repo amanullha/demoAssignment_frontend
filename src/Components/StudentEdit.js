@@ -2,7 +2,7 @@ import { Button, MenuItem, TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 
-const StudentEdit = ({ refetch, studentObj, handleClose, setMessage }) => {
+const StudentEdit = ({ refetch, setRefetch, studentObj, handleClose, setMessage }) => {
 
     const [student, setStudent] = useState(studentObj);
 
@@ -11,7 +11,10 @@ const StudentEdit = ({ refetch, studentObj, handleClose, setMessage }) => {
     const updateData = async () => {
 
 
-        const res = await axios.put(`https://demoassignment.onrender.com/update-student/${studentObj?._id}`, student)
+
+
+
+        const res = await axios.put(`http://localhost:5000/update-student/${studentObj?._id}`, student)
 
         console.log("update ", res);
 
@@ -20,7 +23,7 @@ const StudentEdit = ({ refetch, studentObj, handleClose, setMessage }) => {
         if (res?.data?.modifiedCount) {
             setMessage('Updated student info Successfully!!')
             handleClose();
-            refetch();
+            setRefetch(1 ^ refetch);
         }
 
     }

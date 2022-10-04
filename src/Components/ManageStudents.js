@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -65,15 +65,43 @@ const rows = [
 
 const ManageStudents = () => {
 
+    const [students, setStudents] = useState([])
+
+    const [refetch, setRefetch] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    useEffect(() => {
+
+
+        setIsLoading(true);
+        fetch('http://localhost:5000/get-students', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                setStudents(data);
+                setIsLoading(false);
+
+            })
+
+    }, [refetch])
+
+
     /*
-        const { isLoading, error, data: students, refetch } = useQuery(['repoData'], () => fetch('https://demoassignment.onrender.com/get-students').then(res => res.json()));
+        const { isLoading, error, data: students, refetch } = useQuery(['repoData'], () => fetch('http://localhost:5000/get-students').then(res => res.json()));
         */
 
-    const { isLoading, error, data: students, refetch } = useQuery(['repoData'], () =>
-        fetch('https://demoassignment.onrender.com/get-students').then(res =>
-            res.json()
-        )
-    )
+    // const { isLoading, error, data: students, refetch } = useQuery(['repoData'], () =>
+    //     fetch('http://localhost:5000/get-students').then(res =>
+    //         res.json()
+    //     )
+    // )
 
     const [open, setOpen] = React.useState(false);
     const [modalNbr, setModalNbr] = useState(null);
@@ -189,6 +217,7 @@ const ManageStudents = () => {
                                 <DeleteStudent
                                     key={modalNbr}
                                     refetch={refetch}
+                                    setRefetch={setRefetch}
                                     student={selectStudent}
                                     handleClose={handleClose}
                                     setMessage={setMessage}
@@ -204,6 +233,7 @@ const ManageStudents = () => {
                                 <StudentView
                                     key={modalNbr}
                                     refetch={refetch}
+                                    setRefetch={setRefetch}
                                     student={selectStudent}
                                     handleClose={handleClose}
                                     setMessage={setMessage}
@@ -219,6 +249,7 @@ const ManageStudents = () => {
                                 <StudentEdit
                                     key={modalNbr}
                                     refetch={refetch}
+                                    setRefetch={setRefetch}
                                     studentObj={selectStudent}
                                     handleClose={handleClose}
                                     setMessage={setMessage}

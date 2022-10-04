@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import React from 'react';
 
-const StudentView = ({ refetch, student, handleClose, setMessage }) => {
+const StudentView = ({ refetch, setRefetch, student, handleClose, setMessage }) => {
 
 
 

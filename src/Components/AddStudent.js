@@ -26,7 +26,7 @@ const AddStudent = () => {
     const onSubmit = async (data) => {
         console.log(data);
 
-        const res = await axios.post('https://demoassignment.onrender.com/add-student', data);
+        const res = await axios.post('http://localhost:5000/add-student', data);
 
         if (res?.data?.acknowledged) {
 

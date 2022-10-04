@@ -2,13 +2,16 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import React from 'react';
 
-const DeleteStudent = ({ refetch, student, handleClose, setMessage }) => {
+const DeleteStudent = ({ refetch, setRefetch, student, handleClose, setMessage }) => {
 
 
     const handleYes = async () => {
 
 
-        const res = await axios.delete(`https://demoassignment.onrender.com/delete-student/${student?._id}`, {
+        
+
+
+        const res = await axios.delete(`http://localhost:5000/delete-student/${student?._id}`, {
             headers: {
                 'content-type': 'application/json',
             }
@@ -16,7 +19,7 @@ const DeleteStudent = ({ refetch, student, handleClose, setMessage }) => {
         if (res.data.deletedCount) {
             setMessage('Deleted student Successfully!!')
             handleClose();
-            refetch();
+            setRefetch(1^refetch);
         }
 
     }
