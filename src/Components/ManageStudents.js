@@ -65,8 +65,15 @@ const rows = [
 
 const ManageStudents = () => {
 
+    /*
+        const { isLoading, error, data: students, refetch } = useQuery(['repoData'], () => fetch('https://demoassignment.onrender.com/get-students').then(res => res.json()));
+        */
 
-    const { isLoading, error, data: students, refetch } = useQuery(['repoData'], () => fetch('http://localhost:5000/get-students').then(res => res.json()));
+    const { isLoading, error, data: students, refetch } = useQuery(['repoData'], () =>
+        fetch('https://demoassignment.onrender.com/get-students').then(res =>
+            res.json()
+        )
+    )
 
     const [open, setOpen] = React.useState(false);
     const [modalNbr, setModalNbr] = useState(null);
@@ -125,7 +132,7 @@ const ManageStudents = () => {
                     </TableHead>
 
                     <TableBody>
-                        {students.map((row, index) => (
+                        {students?.map((row, index) => (
 
                             <StyledTableRow key={row?.firstName}>
 

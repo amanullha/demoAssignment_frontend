@@ -11,7 +11,7 @@ const StudentEdit = ({ refetch, studentObj, handleClose, setMessage }) => {
     const updateData = async () => {
 
 
-        const res = await axios.put(`http://localhost:5000/update-student/${studentObj?._id}`, student)
+        const res = await axios.put(`https://demoassignment.onrender.com/update-student/${studentObj?._id}`, student)
 
         console.log("update ", res);
 
@@ -25,7 +25,12 @@ const StudentEdit = ({ refetch, studentObj, handleClose, setMessage }) => {
 
     }
 
+    // {
+    //     headers: {
+    //         'content-type': 'application/json',
+    //         }
 
+    // },
 
 
 

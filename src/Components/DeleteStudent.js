@@ -8,7 +8,11 @@ const DeleteStudent = ({ refetch, student, handleClose, setMessage }) => {
     const handleYes = async () => {
 
 
-        const res = await axios.delete(`http://localhost:5000/delete-student/${student?._id}`)
+        const res = await axios.delete(`https://demoassignment.onrender.com/delete-student/${student?._id}`, {
+            headers: {
+                'content-type': 'application/json',
+            }
+        })
         if (res.data.deletedCount) {
             setMessage('Deleted student Successfully!!')
             handleClose();

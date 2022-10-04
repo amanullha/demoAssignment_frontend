@@ -11,7 +11,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
-    <div className=" relative" style={{position:'relative'}}>
+    <div className=" relative" style={{ position: 'relative' }}>
 
       <Navbar className="z-50 fixed top-0" />
 
@@ -25,19 +25,21 @@ function App() {
             )
           }
 
-          <Route element={<Dashboard />} >
+          <Route element={<RequireAuth />}>
+            <Route element={<Dashboard />} >
 
-            {
-              privateRoutes.map(({ Path, Name, Component }, i) => {
+              {
+                privateRoutes.map(({ Path, Name, Component }, i) => {
 
-                return (
-                  <Route path={Path} element={<Component />} />
-                )
+                  return (
+                    <Route path={Path} element={<Component />} />
+                  )
 
-              })
+                })
 
-            }
+              }
 
+            </Route>
           </Route>
 
 

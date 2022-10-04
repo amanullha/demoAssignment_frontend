@@ -14,7 +14,7 @@ const AddStudent = () => {
     const [add, setAdd] = useState(null);
 
     let errorMessage;
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [
         createUserWithEmailAndPassword,
         user,
@@ -26,12 +26,13 @@ const AddStudent = () => {
     const onSubmit = async (data) => {
         console.log(data);
 
-        const res = await axios.post('http://localhost:5000/add-student', data);
+        const res = await axios.post('https://demoassignment.onrender.com/add-student', data);
 
         if (res?.data?.acknowledged) {
 
             toast.success("Student added!")
             setAdd("New Student Added Successfully!!!")
+            reset();
         }
 
         console.log('res: ', res);
@@ -257,7 +258,7 @@ const AddStudent = () => {
                                 label="Enter Roll Number in Digit"
                                 type="number"
                                 autoComplete="current-roll"
-                                
+
                                 {
                                 ...register("roll", {
                                     required: {
